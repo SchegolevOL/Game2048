@@ -135,7 +135,7 @@ void DnField(char Field[4][4][4])
 				}
 				else if (CharInt(Field, 3-i, j) == CharInt(Field, 2-i, j) && (CharInt(Field, 3-i, j) % 2 == 0))
 				{
-					IntChar(Field, 3-i, j, CharInt(Field, i, j) * 2 + 1);//+1 פכאד קעמ בûכא סףללא
+					IntChar(Field, 3-i, j, CharInt(Field, 2-i, j) * 2 + 1);//+1 פכאד קעמ בûכא סףללא
 					IntChar(Field, 2-i, j, 0);
 				}
 			}
@@ -152,4 +152,81 @@ void DnField(char Field[4][4][4])
 		}
 	}
 }
+
+void LeftField(char Field[4][4][4])
+{
+	for (size_t i = 0; i < 4; i++)
+	{
+		for (size_t l = 0; l < 4; l++)
+		{
+			for (size_t j = 0; j < 3; j++)
+			{
+				if (CharInt(Field, i, j) == 0)
+				{
+					for (size_t z = 0; z < 4; z++)
+					{
+						char tmp = Field[i][j][z];
+						Field[i][j][z] = Field[i][j+1][z];
+						Field[i][j+1][z] = tmp;
+					}
+
+				}
+				else if (CharInt(Field, i, j) == CharInt(Field, i, j + 1) && (CharInt(Field, i, j) % 2 == 0))
+				{
+					IntChar(Field, i, j, CharInt(Field, i, j) * 2 + 1);//+1 פכאד קעמ בûכא סףללא
+					IntChar(Field, i, j+1, 0);
+				}
+			}
+		}
+		for (size_t i = 0; i < 4; i++)
+		{
+			for (size_t j = 0; j < 4; j++)
+			{
+				if (CharInt(Field, i, j) % 2 == 1)
+				{
+					Field[i][j][3] = Field[i][j][3] - 1;
+				}
+			}
+		}
+	}
+}
+
+void RightField(char Field[4][4][4])
+{
+	for (size_t i = 0; i < 4; i++)
+	{
+		for (size_t l = 0; l < 4; l++)
+		{
+			for (size_t j = 0; j < 3; j++)
+			{
+				if (CharInt(Field, i, 3-j) == 0)
+				{
+					for (size_t z = 0; z < 4; z++)
+					{
+						char tmp = Field[i][3-j][z];
+						Field[i][3-j][z] = Field[i][2-j][z];
+						Field[i][2-j][z] = tmp;
+					}
+
+				}
+				else if (CharInt(Field, i, 3-j) == CharInt(Field, i, 2-j) && (CharInt(Field, i, 3-j) % 2 == 0))
+				{
+					IntChar(Field, i, 3-j, CharInt(Field, i, 3-j) * 2 + 1);//+1 פכאד קעמ בûכא סףללא
+					IntChar(Field, i, 2-j, 0);
+				}
+			}
+		}
+		for (size_t i = 0; i < 4; i++)
+		{
+			for (size_t j = 0; j < 4; j++)
+			{
+				if (CharInt(Field, i, j) % 2 == 1)
+				{
+					Field[i][j][3] = Field[i][j][3] - 1;
+				}
+			}
+		}
+	}
+}
+
 

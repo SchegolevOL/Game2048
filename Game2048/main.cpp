@@ -56,19 +56,27 @@ int main()
 	IntChar(Field, 0, 0, 2);
 	IntChar(Field, 1, 2, 2);
 	IntChar(Field, 0, 2, 2);
-	IntChar(Field, 2, 2, 4);
+	IntChar(Field, 2, 2, 2);
 	IntChar(Field, 3, 0, 4);
 	IntChar(Field, 3, 2, 2);
 	IntChar(Field, 2, 1, 4);
 	IntChar(Field, 3, 1, 4);
 	IntChar(Field, 0, 0, 4);
+	IntChar(Field, 1, 0, 2);
+	IntChar(Field, 1, 1, 2);
 	PrintField(Field);
-	UpField(Field);	
-	PrintField(Field);
+	
+	/*UpField(Field);	
+	PrintField(Field);*/ 
+	
 	DnField(Field);
 	PrintField(Field);
-	
-	
+
+	/*LeftField(Field);
+	PrintField(Field);*/
+
+	/*RightField(Field);
+	PrintField(Field);*/
 
 
 	return 0;
