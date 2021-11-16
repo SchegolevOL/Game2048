@@ -5,10 +5,12 @@
 #define HORIZONTAL "\t\t\t\t\t"
 void PrintField(char Field[4][4][4])
 {
+	cout << VERTIKAL;
 	for (size_t i = 0; i < 4; i++)
 	{
-		cout << "  ---------------------------" << endl;
-		cout << " |      |      |      |      |" << endl;
+		cout << HORIZONTAL << "  ---------------------------" << endl;
+		cout << HORIZONTAL << " |      |      |      |      |" << endl;
+		cout << HORIZONTAL;
 		for (size_t j = 0; j < 4; j++)
 		{			
 			cout << " | ";
@@ -19,9 +21,9 @@ void PrintField(char Field[4][4][4])
 			
 		}
 		cout <<" | " << endl;
-		cout << " |      |      |      |      |" << endl;
+		cout << HORIZONTAL << " |      |      |      |      |" << endl;
 	}
-	cout << "  ---------------------------" << endl;
+	cout << HORIZONTAL << "  ---------------------------" << endl;
 }
 
 int CharInt(char Field[4][4][4], const size_t RowValue, const size_t ColumValue)
@@ -75,4 +77,79 @@ void IntChar(char Field[4][4][4], const size_t RowValue, const size_t ColumValue
 	
 }
 
+void UpField(char Field[4][4][4])
+{
+	for (size_t j = 0; j < 4; j++)
+	{
+		for (size_t l = 0; l < 4; l++)
+		{
+			for (size_t i = 0; i < 4-1; i++)
+			{
+				if (CharInt(Field,i,j)==0)
+				{
+					for (size_t z = 0; z < 4; z++)
+					{
+						char tmp = Field[i][j][z];
+						Field[i][j][z]= Field[i+1][j][z];
+						Field[i + 1][j][z] = tmp;
+					}		
+					
+				}
+				else if (CharInt(Field, i, j)== CharInt(Field, i + 1, j) && (CharInt(Field, i, j)%2==0))
+				{
+					IntChar(Field, i, j, CharInt(Field, i, j) * 2 + 1);//+1 פכאד קעמ בûכא סףללא
+					IntChar(Field, i + 1, j, 0);
+				}
+			}
+		}
+		for (size_t i = 0; i < 4; i++)
+		{
+			for (size_t j = 0; j < 4; j++)
+			{
+				if (CharInt(Field, i, j) % 2 == 1)
+				{
+					Field[i][j][3] = Field[i][j][3] - 1;
+				}
+			}
+		}
+	}	
+}
+
+void DnField(char Field[4][4][4])
+{
+	for (size_t j = 0; j < 4; j++)
+	{
+		for (size_t l = 0; l < 4; l++)
+		{
+			for (size_t i = 0; i < 3 ; i++)
+			{
+				if (CharInt(Field, 3-i, j) == 0)
+				{
+					for (size_t z = 0; z < 4; z++)
+					{
+						char tmp = Field[3-i][j][z];
+						Field[3-i][j][z] = Field[2-i][j][z];
+						Field[2-i][j][z] = tmp;
+					}
+
+				}
+				else if (CharInt(Field, 3-i, j) == CharInt(Field, 2-i, j) && (CharInt(Field, 3-i, j) % 2 == 0))
+				{
+					IntChar(Field, 3-i, j, CharInt(Field, i, j) * 2 + 1);//+1 פכאד קעמ בûכא סףללא
+					IntChar(Field, 2-i, j, 0);
+				}
+			}
+		}
+		for (size_t i = 0; i < 4; i++)
+		{
+			for (size_t j = 0; j < 4; j++)
+			{
+				if (CharInt(Field, i, j) % 2 == 1)
+				{
+					Field[i][j][3] = Field[i][j][3] - 1;
+				}
+			}
+		}
+	}
+}
 
