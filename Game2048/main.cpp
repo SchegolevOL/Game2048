@@ -17,12 +17,14 @@ int main()
 	char Field[4][4][4];
 	ComplitFild(Field);
 	
-	PlayField(Field);
 	Field[0][0][0] = ' ';
 	Field[0][0][1] = ' ';
 	Field[0][0][2] = '2';
 	Field[0][0][3] = '8';
-	PlayField(Field);
-	cout << CharInt(Field,4,4);
+	PrintField(Field);
+	cout << CharInt(Field, 0, 0) << endl;
+	IntChar(Field,1,3,2);
+	
+	PrintField(Field);
 	return 0;
 }
