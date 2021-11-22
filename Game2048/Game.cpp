@@ -88,6 +88,10 @@ void UpField(char Field[4][4][4], bool& flag)
 			{
 				if (CharInt(Field,i,j)==0)
 				{
+					if (CharInt(Field, i+1, j)!=0 && flag==1)
+					{
+						flag = 0;
+					}
 					for (size_t z = 0; z < 4; z++)
 					{
 						char tmp = Field[i][j][z];
@@ -95,7 +99,7 @@ void UpField(char Field[4][4][4], bool& flag)
 						Field[i + 1][j][z] = tmp;
 						
 					}		
-					flag = 0;
+					
 				}
 				else if (CharInt(Field, i, j)== CharInt(Field, i + 1, j) && (CharInt(Field, i, j)%2==0))
 				{
@@ -103,6 +107,9 @@ void UpField(char Field[4][4][4], bool& flag)
 					IntChar(Field, i + 1, j, 0);
 					flag = 0;
 				}
+				
+					
+				
 			}
 		}
 		for (size_t i = 0; i < 4; i++)
@@ -128,13 +135,16 @@ void DnField(char Field[4][4][4], bool& flag)
 			{
 				if (CharInt(Field, 3-i, j) == 0)
 				{
+					if (CharInt(Field, 2-i, j) != 0 && flag == 1)
+					{
+						flag = 0;
+					}
 					for (size_t z = 0; z < 4; z++)
 					{
 						char tmp = Field[3-i][j][z];
 						Field[3-i][j][z] = Field[2-i][j][z];
 						Field[2-i][j][z] = tmp;
 					}
-					flag = 0;
 				}
 				else if (CharInt(Field, 3-i, j) == CharInt(Field, 2-i, j) && (CharInt(Field, 3-i, j) % 2 == 0))
 				{
@@ -142,6 +152,9 @@ void DnField(char Field[4][4][4], bool& flag)
 					IntChar(Field, 2-i, j, 0);
 					flag = 0;
 				}
+				
+					
+				
 			}
 		}
 		for (size_t i = 0; i < 4; i++)
@@ -167,13 +180,16 @@ void LeftField(char Field[4][4][4], bool& flag)
 			{
 				if (CharInt(Field, i, j) == 0)
 				{
+					if (CharInt(Field, i, j+1) != 0 && flag == 1)
+					{
+						flag = 0;
+					}
 					for (size_t z = 0; z < 4; z++)
 					{
 						char tmp = Field[i][j][z];
 						Field[i][j][z] = Field[i][j+1][z];
 						Field[i][j+1][z] = tmp;
 					}
-					flag = 0;
 				}
 				else if (CharInt(Field, i, j) == CharInt(Field, i, j + 1) && (CharInt(Field, i, j) % 2 == 0))
 				{
@@ -181,6 +197,9 @@ void LeftField(char Field[4][4][4], bool& flag)
 					IntChar(Field, i, j+1, 0);
 					flag = 0;
 				}
+				
+					
+				
 			}
 		}
 		for (size_t i = 0; i < 4; i++)
@@ -206,13 +225,17 @@ void RightField(char Field[4][4][4], bool& flag)
 			{
 				if (CharInt(Field, i, 3-j) == 0)
 				{
+					if (CharInt(Field, i, 2-j) != 0 && flag == 1)
+					{
+						flag = 0;
+					}
 					for (size_t z = 0; z < 4; z++)
 					{
 						char tmp = Field[i][3-j][z];
 						Field[i][3-j][z] = Field[i][2-j][z];
 						Field[i][2-j][z] = tmp;
+
 					}
-					flag = 0;
 				}
 				else if (CharInt(Field, i, 3-j) == CharInt(Field, i, 2-j) && (CharInt(Field, i, 3-j) % 2 == 0))
 				{
@@ -220,6 +243,9 @@ void RightField(char Field[4][4][4], bool& flag)
 					IntChar(Field, i, 2-j, 0);
 					flag = 0;
 				}
+				
+					
+				
 			}
 		}
 		for (size_t i = 0; i < 4; i++)

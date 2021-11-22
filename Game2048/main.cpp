@@ -34,29 +34,29 @@ int main()
 		PrintField(Field);
 		char key;
 		key = _getch();
-
+		
 
 		switch (key)
 		{
-			case '8':
+			case 'w':
 			{
 				UpField(Field, flag);
 				PrintField(Field);
 				break;
 			}
-			case '2':
+			case 's':
 			{
 				DnField(Field, flag);
 				PrintField(Field);
 				break;
 			}
-			case '4':
+			case 'a':
 			{
 				LeftField(Field, flag);
 				PrintField(Field);
 				break;
 			}
-			case '6':
+			case 'd':
 			{
 				RightField(Field, flag);
 				PrintField(Field);
