@@ -5,6 +5,7 @@
 #define HORIZONTAL "\t\t\t\t\t"
 void PrintField(char Field[4][4][4])
 {
+	system("CLS");
 	cout << VERTIKAL;
 	for (size_t i = 0; i < 4; i++)
 	{
@@ -77,7 +78,7 @@ void IntChar(char Field[4][4][4], const size_t RowValue, const size_t ColumValue
 	
 }
 
-void UpField(char Field[4][4][4])
+void UpField(char Field[4][4][4], bool& flag)
 {
 	for (size_t j = 0; j < 4; j++)
 	{
@@ -92,13 +93,15 @@ void UpField(char Field[4][4][4])
 						char tmp = Field[i][j][z];
 						Field[i][j][z]= Field[i+1][j][z];
 						Field[i + 1][j][z] = tmp;
+						
 					}		
-					
+					flag = 0;
 				}
 				else if (CharInt(Field, i, j)== CharInt(Field, i + 1, j) && (CharInt(Field, i, j)%2==0))
 				{
 					IntChar(Field, i, j, CharInt(Field, i, j) * 2 + 1);//+1 פכאד קעמ בûכא סףללא
 					IntChar(Field, i + 1, j, 0);
+					flag = 0;
 				}
 			}
 		}
@@ -115,7 +118,7 @@ void UpField(char Field[4][4][4])
 	}	
 }
 
-void DnField(char Field[4][4][4])
+void DnField(char Field[4][4][4], bool& flag)
 {
 	for (size_t j = 0; j < 4; j++)
 	{
@@ -131,12 +134,13 @@ void DnField(char Field[4][4][4])
 						Field[3-i][j][z] = Field[2-i][j][z];
 						Field[2-i][j][z] = tmp;
 					}
-
+					flag = 0;
 				}
 				else if (CharInt(Field, 3-i, j) == CharInt(Field, 2-i, j) && (CharInt(Field, 3-i, j) % 2 == 0))
 				{
 					IntChar(Field, 3-i, j, CharInt(Field, 2-i, j) * 2 + 1);//+1 פכאד קעמ בûכא סףללא
 					IntChar(Field, 2-i, j, 0);
+					flag = 0;
 				}
 			}
 		}
@@ -153,7 +157,7 @@ void DnField(char Field[4][4][4])
 	}
 }
 
-void LeftField(char Field[4][4][4])
+void LeftField(char Field[4][4][4], bool& flag)
 {
 	for (size_t i = 0; i < 4; i++)
 	{
@@ -169,12 +173,13 @@ void LeftField(char Field[4][4][4])
 						Field[i][j][z] = Field[i][j+1][z];
 						Field[i][j+1][z] = tmp;
 					}
-
+					flag = 0;
 				}
 				else if (CharInt(Field, i, j) == CharInt(Field, i, j + 1) && (CharInt(Field, i, j) % 2 == 0))
 				{
 					IntChar(Field, i, j, CharInt(Field, i, j) * 2 + 1);//+1 פכאד קעמ בûכא סףללא
 					IntChar(Field, i, j+1, 0);
+					flag = 0;
 				}
 			}
 		}
@@ -191,7 +196,7 @@ void LeftField(char Field[4][4][4])
 	}
 }
 
-void RightField(char Field[4][4][4])
+void RightField(char Field[4][4][4], bool& flag)
 {
 	for (size_t i = 0; i < 4; i++)
 	{
@@ -207,12 +212,13 @@ void RightField(char Field[4][4][4])
 						Field[i][3-j][z] = Field[i][2-j][z];
 						Field[i][2-j][z] = tmp;
 					}
-
+					flag = 0;
 				}
 				else if (CharInt(Field, i, 3-j) == CharInt(Field, i, 2-j) && (CharInt(Field, i, 3-j) % 2 == 0))
 				{
 					IntChar(Field, i, 3-j, CharInt(Field, i, 3-j) * 2 + 1);//+1 פכאד קעמ בûכא סףללא
 					IntChar(Field, i, 2-j, 0);
+					flag = 0;
 				}
 			}
 		}
@@ -228,5 +234,62 @@ void RightField(char Field[4][4][4])
 		}
 	}
 }
+
+void AddValue(char Field[4][4][4])
+{
+	int arr[16];
+	int z = 0;
+	int value;
+	for (size_t i = 0; i < 4; i++)
+	{
+		for (size_t j = 0; j < 4; j++)
+		{
+			if (CharInt(Field, i, j)==0)
+			{
+				arr[z] = i * 10 + j;
+				z++;
+			}
+
+		}
+	}
+	value = arr[rand() % (z)];
+	IntChar(Field, value / 10, value % 10, 2);
+}
+
+int Victory(char Field[4][4][4])
+{
+	for (size_t i = 0; i < 4; i++)
+	{
+		for (size_t j = 0; j < 4; j++)
+		{
+			if (CharInt(Field,i,j)==2048)
+			{
+				return 1;
+			}
+		}
+	}
+	return 0;
+}
+
+int GameOver(char Field[4][4][4])
+{
+	int g = 0;
+	for (size_t i = 0; i < 4; i++)
+	{
+		for (size_t j = 0; j < 4; j++)
+		{
+			if (CharInt(Field, i, j)==0)
+			{
+				g++;
+			}
+		}
+	}
+	if (g>0)
+	{
+		return 0;
+	}
+	return 1;
+}
+
 
 
